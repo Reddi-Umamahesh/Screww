@@ -19,6 +19,9 @@ const companySchema: Schema<ICompany> = new Schema({
   description: {
     type: String,
   },
+  phoneNumber: {
+    type: String
+  },
   website: {
     type: String,
   },
@@ -35,4 +38,4 @@ const companySchema: Schema<ICompany> = new Schema({
   },
 }, { timestamps: true });
 
-export const Company = mongoose.model<ICompany>('Comapany',companySchema)
+export const Company = mongoose.model<ICompany>('Company',companySchema)

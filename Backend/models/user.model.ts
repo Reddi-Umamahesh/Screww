@@ -10,7 +10,7 @@ export interface Iuser extends Document {
   phoneNumber: string;
   password: string;
   email: string;
-  role: "User" | "Professionals";
+  role: "User" | "Professional";
   profile: Iprofile;
 }
 

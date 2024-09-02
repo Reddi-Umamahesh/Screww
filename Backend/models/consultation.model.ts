@@ -3,6 +3,7 @@ import mongoose, { Document, Schema } from "mongoose";
 export interface IConsultation extends Document {
   job: mongoose.Schema.Types.ObjectId;
   consultant: mongoose.Schema.Types.ObjectId;
+  noOfTimes: number;
   rating: "excellent" | "good" | "average" | "poor" | "terrible";
 }
 const consultationSchema: Schema<IConsultation> = new Schema(
@@ -17,6 +18,10 @@ const consultationSchema: Schema<IConsultation> = new Schema(
       ref: "User",
       required: true,
     },
+    noOfTimes: {
+      type: Number,
+      default: 1
+    },
     rating: {
       type: String,
       enum: ["excellent", "good", "average", "poor", "terrible"],
@@ -25,4 +30,4 @@ const consultationSchema: Schema<IConsultation> = new Schema(
   },
   { timestamps: true }
 );
-export const Consultation = mongoose.model<IConsultation>('Conultation',consultationSchema)
+export const Consultation = mongoose.model<IConsultation>('Consultation',consultationSchema)

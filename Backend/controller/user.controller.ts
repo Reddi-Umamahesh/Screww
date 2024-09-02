@@ -2,8 +2,7 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { User, Iuser, Iprofile } from "../models/user.model";
-import { promises } from "dns";
-import { error } from "console";
+
 
 interface RegisterRequest extends Request {
   file?: Express.Multer.File; 
