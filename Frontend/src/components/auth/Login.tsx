@@ -8,6 +8,10 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { USER_API_ENDPOINT } from "@/utils/constant";
 import { toast } from "sonner";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading, setUser } from "@/redux/authSlice";
+import store,{RootState} from "@/redux/store";
+import { Loader2 } from "lucide-react";
 
 const Login: React.FC = () => {
   const [input, setInput] = useState({
@@ -17,8 +21,9 @@ const Login: React.FC = () => {
     role: "",
   });
 
-  const navigate = useNavigate(); // Move useNavigate here
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const loading = useSelector((state: RootState) => state.auth.loading);
   const changeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
@@ -32,6 +37,7 @@ const Login: React.FC = () => {
     formData.append("role", input.role);
 
     try {
+      dispatch(setLoading( true))
       const res = await axios.post(`${USER_API_ENDPOINT}/login`, formData, {
         headers: {
           "Content-Type": "application/json",
@@ -39,9 +45,10 @@ const Login: React.FC = () => {
         },
       });
       if (res.data.success) {
-        navigate("/"); // Use navigate here
-        toast.success("logged in ");
-        console.log(res.data);
+        dispatch(setUser(res.data.user)  );
+        navigate("/");
+        
+        toast.success("logged in "); 
         toast.success(res.data.message);
       }
     } catch (error) {
@@ -55,6 +62,9 @@ const Login: React.FC = () => {
       } else {
         toast.error("An unexpected error occurred");
       }
+    }
+    finally {
+      dispatch(setLoading(false))
     }
   };
 
@@ -125,9 +135,17 @@ const Login: React.FC = () => {
               </div>
             </RadioGroup>
           </div>
-          <Button type="submit" className="w-full my-4">
-            Login
-          </Button>
+          {loading ? (
+            <Button className="w-full my-4">
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              please wait
+            </Button>
+          ) : (
+            <Button type="submit" className="w-full my-4">
+              Login
+            </Button>
+          )}
+
           <span className="text-sm">
             Don't have an account?{" "}
             <Link className="text-blue-600" to="/signup">

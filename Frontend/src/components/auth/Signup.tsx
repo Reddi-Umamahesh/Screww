@@ -2,12 +2,15 @@ import React, { useState, FormEvent } from "react";
 import Navbar from "../shared/Navbar";
 import { Label } from "@radix-ui/react-label";
 import { Input } from "../ui/input";
-import { RadioGroup } from "@radix-ui/react-radio-group"; // Ensure this import is correct
+import { RadioGroup } from "@radix-ui/react-radio-group";
 import { Button } from "../ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { USER_API_ENDPOINT } from "@/utils/constant";
 import { toast } from "sonner";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "@/redux/authSlice";
+import store, { RootState } from "@/redux/store";
 
 const Signup: React.FC = () => {
   const [input, setInput] = useState({
@@ -19,7 +22,9 @@ const Signup: React.FC = () => {
     file: undefined as File | undefined,
   });
 
-  const navigate = useNavigate(); // Ensure useNavigate is called correctly
+  const navigate = useNavigate(); 
+  const dispatch = useDispatch();
+  const loading = useSelector((state: RootState) => state.auth.loading);
 
   const changeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -31,7 +36,7 @@ const Signup: React.FC = () => {
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+   
     const formData = new FormData();
     formData.append("fullname", input.fullname);
     formData.append("email", input.email);
@@ -43,6 +48,7 @@ const Signup: React.FC = () => {
     }
     console
     try {
+      dispatch(setLoading(true));
       const res = await axios.post(`${USER_API_ENDPOINT}/register`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -62,6 +68,8 @@ const Signup: React.FC = () => {
       } else {
         toast.error("An unexpected error occurred");
       }
+    } finally {
+      dispatch(setLoading(false));
     }
   };
 

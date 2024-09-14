@@ -8,9 +8,12 @@ import {
 import { Button } from "@/components/ui/button";
 import {  LogOut, User2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import store, { RootState } from "@/redux/store";
 
 const Navbar: React.FC = () => {
-    const user =false;
+
+   const { user } = useSelector((state: RootState) => state.auth);
   return (
     <div>
       <div className="flex justify-between mx-auto max-w-7xl h-16">
@@ -19,9 +22,15 @@ const Navbar: React.FC = () => {
         </div>
         <div className="flex items-center gap-12 ">
           <ul className="flex font-medium items-center gap-5">
-            <li> Home</li>
-            <li> Services</li>
-            <li> Browse</li>
+            <li>
+              <Link to="/"> Home</Link>
+            </li>
+            <li>
+              <Link to="/Services"> Services</Link>
+            </li>
+            <li>
+              <Link to="/Browse"> Browse</Link>
+            </li>
           </ul>
           {!user ? (
             <div>
@@ -58,7 +67,9 @@ const Navbar: React.FC = () => {
                 <div className="flex-col text-gray-600 my-2">
                   <div className="flex w-fit items-center gap-2 cursor-pointer">
                     <User2 />
-                    <Button variant="link">View Profile</Button>
+                      <Button variant="link">
+                        <Link to='/profile'>view profile</Link>
+                    </Button>
                   </div>
                   <div className="flex w-fit items-center gap-2 cursor-pointer">
                     <LogOut />
