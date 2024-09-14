@@ -2,10 +2,9 @@ import React from 'react'
 import Navbar from './shared/Navbar'
 import FilterCard from './FilterCard'
 import Job from './Job'
-import { spawn } from 'child_process'
 
-const jobsArray = [1,2,3,4,5,6,7,8]
-const Jobs = () => {
+const jobsArray = [1, 2, 3, 4, 5, 6, 7, 8];
+const Jobs: React.FC = () => {
   return (
     <div>
       <Navbar />
@@ -19,7 +18,7 @@ const Jobs = () => {
           ) : (
             <div className=" flex-1 h-[80vh] overflow-y-auto pb-5">
               <div className="grid grid-cols-3 gap-4">
-                {jobsArray.map((job) => (
+                {jobsArray.map(() => (
                   <div>
                     <Job />
                   </div>
@@ -31,6 +30,6 @@ const Jobs = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Jobs

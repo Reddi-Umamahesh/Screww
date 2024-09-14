@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import {  LogOut, User2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import store, { RootState } from "@/redux/store";
+import  { RootState } from "@/redux/store";
 
 const Navbar: React.FC = () => {
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from './ui/button';
 import { Search } from 'lucide-react';
 
-const HeroSection = () => {
+const HeroSection: React.FC = () => {
   return (
     <div className="text-center">
       <div className="flex flex-col gap-5 m-10">
@@ -30,6 +30,6 @@ const HeroSection = () => {
       </div>
     </div>
   );
-}
+};
 
 export default HeroSection

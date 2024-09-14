@@ -2,7 +2,7 @@ import React from 'react'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from './ui/table'
 import { Badge } from './ui/badge';
 
-const PreviousBookings = () => {
+const PreviousBookings: React.FC = () => {
   return (
     <div>
       <Table>
@@ -16,18 +16,20 @@ const PreviousBookings = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {[1, 2].map((item, index) => (
+          {[1, 2].map(( index) => (
             <TableRow key={index}>
               <TableCell>09-11-2024</TableCell>
               <TableCell>Electritians</TableCell>
               <TableCell>Elects.com</TableCell>
-              <TableCell className='text-right'><Badge>good</Badge></TableCell>
+              <TableCell className="text-right">
+                <Badge>good</Badge>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </div>
   );
-}
+};
 
 export default PreviousBookings

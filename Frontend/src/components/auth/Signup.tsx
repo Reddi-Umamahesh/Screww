@@ -25,7 +25,7 @@ const Signup: React.FC = () => {
   const navigate = useNavigate(); 
   const dispatch = useDispatch();
   const loading = useSelector((state: RootState) => state.auth.loading);
-  
+  console.log(loading);
   const changeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
