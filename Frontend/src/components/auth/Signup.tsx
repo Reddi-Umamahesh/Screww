@@ -10,7 +10,7 @@ import { USER_API_ENDPOINT } from "@/utils/constant";
 import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "@/redux/authSlice";
-import store, { RootState } from "@/redux/store";
+import  { RootState } from "@/redux/store";
 
 const Signup: React.FC = () => {
   const [input, setInput] = useState({
@@ -25,7 +25,7 @@ const Signup: React.FC = () => {
   const navigate = useNavigate(); 
   const dispatch = useDispatch();
   const loading = useSelector((state: RootState) => state.auth.loading);
-
+  
   const changeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };

@@ -5,7 +5,7 @@ import { Avatar, AvatarImage } from './ui/avatar'
 import { Badge } from './ui/badge'
 import { useNavigate } from 'react-router-dom'
 
-const Job = () => {
+const Job:React.FC = () => {
   const navigate = useNavigate();
   const jobId  = '12asfdiouornvancasdonhy'
   return (

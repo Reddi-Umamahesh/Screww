@@ -3,7 +3,7 @@ import Navbar from './shared/Navbar'
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 
-const ServiceDescription = () => {
+const ServiceDescription: React.FC = () => {
   return (
     <div>
       <Navbar />
@@ -40,6 +40,6 @@ const ServiceDescription = () => {
       </div>
     </div>
   );
-}
+};
 
 export default ServiceDescription

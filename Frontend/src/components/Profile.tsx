@@ -4,10 +4,10 @@ import { Avatar } from '@radix-ui/react-avatar'
 import { AvatarImage } from './ui/avatar'
 import { Button } from './ui/button'
 import { Contact, Mail, Pen } from 'lucide-react'
-import { Badge } from './ui/badge'
+
 import PreviousBookings from './PreviousBookings'
 
-const Profile = () => {
+const Profile: React.FC = () => {
   return (
     <div>
       <Navbar />
@@ -39,11 +39,11 @@ const Profile = () => {
         </div>
       </div>
       <div className="max-w-4xl mx-auto bg-white rounded-2xl">
-              <h1 className='font-bold text-lg my-5'>Previous Bookings</h1>
-              <PreviousBookings />
+        <h1 className="font-bold text-lg my-5">Previous Bookings</h1>
+        <PreviousBookings />
       </div>
     </div>
   );
-}
+};
 
 export default Profile

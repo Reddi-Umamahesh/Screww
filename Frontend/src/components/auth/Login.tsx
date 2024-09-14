@@ -10,7 +10,7 @@ import { USER_API_ENDPOINT } from "@/utils/constant";
 import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, setUser } from "@/redux/authSlice";
-import store,{RootState} from "@/redux/store";
+import {RootState} from "@/redux/store";
 import { Loader2 } from "lucide-react";
 
 const Login: React.FC = () => {
