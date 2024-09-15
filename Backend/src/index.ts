@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRoute from "../routes/user.route";
 import CompanyRoute from "../routes/company.route";
-import JobRoute from '../routes/job.route';
+import JobRoute from "../routes/job.route";
 import ConsultationRoute from "../routes/consultation.route";
 import cookieParser from "cookie-parser";
 dotenv.config();
@@ -25,9 +25,9 @@ mongoose
   .catch((err) => console.error("MongoDB connection error:", err));
 
 app.use("/api/v1/user", userRoute);
-app.use('/api/v1/company', CompanyRoute);
+app.use("/api/v1/company", CompanyRoute);
 app.use("/api/v1/job", JobRoute);
-app.use("/api/v1/consultation",ConsultationRoute)
+app.use("/api/v1/consultation", ConsultationRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
