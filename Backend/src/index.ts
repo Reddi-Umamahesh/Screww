@@ -8,6 +8,7 @@ import ConsultationRoute from "../routes/consultation.route";
 import cookieParser from "cookie-parser";
 dotenv.config();
 import cors from "cors";
+import { METHODS } from "http";
 const app = express();
 const port = process.env.PORT || 8000;
 
@@ -15,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 const corsOptions = {
-  origin: "https://screww.vercel.app",
+  origin: "http://localhost:5173",
   credentials: true,
 };
 app.use(cors(corsOptions));

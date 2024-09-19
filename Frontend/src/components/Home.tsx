@@ -4,8 +4,10 @@ import HeroSection from "./HeroSection";
 import CategoryCarouse from "./CategoryCarouse";
 import LatestJobs from "./LatestJobs";
 import Footer from "./shared/Footer";
+import useGetAllJobs from "@/hooks/useGetAllJobs";
 
-const Home:React.FC = () => {
+const Home: React.FC = () => {
+  useGetAllJobs();
   return (
     <div>
       <Navbar />

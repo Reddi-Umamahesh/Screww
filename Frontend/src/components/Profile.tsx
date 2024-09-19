@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from './shared/Navbar'
 import { Avatar } from '@radix-ui/react-avatar'
 import { AvatarImage } from './ui/avatar'
 import { Button } from './ui/button'
 import { Contact, Mail, Pen } from 'lucide-react'
-
+import UpdateProfileDialog from './UpdateProfileDialog'
 import PreviousBookings from './PreviousBookings'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/redux/store'
 
 const Profile: React.FC = () => {
+  const [open, setOpen] = useState(false);
+  const {user} = useSelector((state: RootState) => state.auth)
+
   return (
     <div>
       <Navbar />
@@ -15,26 +20,30 @@ const Profile: React.FC = () => {
         <div className="flex justify-between">
           <div className="flex items-center gap-4">
             <Avatar className="w-24 ">
-              <AvatarImage src="https://imgs.search.brave.com/WmuJAHYmcLP1d_dVZPZl76v7SaQdxAh8UvjjqLHz-tM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1wc2QvY2Ft/ZXJhLW91dGxpbmUt/bG9nby1kZXNpZ25f/MjMtMjE1MTI2Mzk4/Ny5qcGc_c2l6ZT02/MjYmZXh0PWpwZw"></AvatarImage>
+              <AvatarImage src={user?.profile?.profilePhoto}></AvatarImage>
             </Avatar>
 
             <div>
-              <h1 className="font-medium text-xl">FullName </h1>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+              <h1 className="font-medium text-xl"> {user?.fullname} </h1>
+              <p>{user?.profile?.bio || <span className='text-gray-700'>NA</span>}</p>
             </div>
           </div>
-          <Button className="text-right " variant="outline">
+          <Button
+            onClick={() => setOpen(true)}
+            className="text-right "
+            variant="outline"
+          >
             <Pen />
           </Button>
         </div>
         <div>
           <div className="flex items-center gap-3 my-2">
             <Mail />
-            <span>uma@gmail.com</span>
+            <span>{ user?.email}</span>
           </div>
           <div className="flex items-center gap-3 my-2">
             <Contact />
-            <span>9988798978</span>
+            <span>{user?.phoneNumber}</span>
           </div>
         </div>
       </div>
@@ -42,6 +51,7 @@ const Profile: React.FC = () => {
         <h1 className="font-bold text-lg my-5">Previous Bookings</h1>
         <PreviousBookings />
       </div>
+      <UpdateProfileDialog open={open} setOpen={setOpen} />
     </div>
   );
 };

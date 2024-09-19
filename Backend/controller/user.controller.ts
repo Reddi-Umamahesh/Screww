@@ -2,6 +2,10 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { User, Iuser, Iprofile } from "../models/user.model";
+// import getDataUri from "../utils/datauri.ts";
+// import cloudinary from "../utils/cloudinary.ts";
+import getDatauri from '../utils/datauri'
+import cloudinary from '../utils/cloudinary'
 
 interface RegisterRequest extends Request {
   file?: Express.Multer.File;
@@ -19,7 +23,7 @@ export const register = async (
   res: Response
 ): Promise<Response> => {
   try {
-      const { fullname, email, phoneNumber, password, role } = req.body;
+    const { fullname, email, phoneNumber, password, role } = req.body;
     if (!fullname || !email || !phoneNumber || !password || !role) {
       return res
         .status(400)
@@ -31,6 +35,20 @@ export const register = async (
         .status(400)
         .json({ message: "Email already exists", success: false });
     }
+     const file = req.file;
+     if (!file) {
+       return res
+         .status(400)
+         .json({ message: "No file uploaded", success: false });
+     }
+
+     const { content } = getDatauri(file);
+     if (!content) {
+       return res
+         .status(400)
+         .json({ message: "Failed to process file", success: false });
+     }
+    const cloudResponse = await cloudinary.uploader.upload(content)
     const hashedPassword = await bcrypt.hash(password, 12);
     await User.create({
       fullname,
@@ -38,6 +56,9 @@ export const register = async (
       phoneNumber,
       password: hashedPassword,
       role,
+      profile: {
+        profilePhoto: cloudResponse.secure_url,
+      },
     });
     return res
       .status(201)
@@ -94,6 +115,7 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
       email: user.email,
       phoneNumber: user.phoneNumber,
       role: user.role,
+      profile: user.profile,
     };
     return res
       .status(200)
@@ -140,6 +162,7 @@ export const updateProfile = async (
 ): Promise<Response> => {
   try {
     const { fullname, email, phoneNumber, bio } = req.body;
+    
     let useId = req.id; //middleware
     const user = await User.findById(useId);
     if (!user) {

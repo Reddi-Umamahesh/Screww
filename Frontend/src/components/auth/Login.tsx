@@ -37,17 +37,17 @@ const Login: React.FC = () => {
     formData.append("role", input.role);
 
     try {
-      dispatch(setLoading( true))
+      dispatch(setLoading(true))
+     
       const res = await axios.post(`${USER_API_ENDPOINT}/login`, formData, {
         headers: {
           "Content-Type": "application/json",
-          withCredentials: true,
         },
+        withCredentials: true,
       });
       if (res.data.success) {
-        dispatch(setUser(res.data.user)  );
-        navigate("/");
-        
+        dispatch(setUser(res.data.user));
+        navigate("/");       
         toast.success("logged in "); 
         toast.success(res.data.message);
       }

@@ -14,8 +14,10 @@ const HeroSection: React.FC = () => {
           <span className="text-[#6A38C2]">Simple, Fast, and Reliable</span>
         </h1>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus
-          corporis dolor sit dolorem nesciunt.
+          Discover and book top-rated local experts for any job with ease.
+          Whether you need a painter, electrician, or any other skilled
+          professional, our platform ensures a simple, fast, and reliable
+          experience
         </p>
         <div className="flex w-[40%] shadow-lg border border-gray-200 pl-3 rounded-full items-center gap-4 mx-auto">
           <input
