@@ -16,7 +16,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 const corsOptions = {
+<<<<<<< HEAD
   origin: "http://localhost:5173",
+=======
+  origin: "https://screww.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+>>>>>>> 463f69f05afaa1a399957917c0bb7701c4f36ea4
   credentials: true,
 };
 app.use(cors(corsOptions));
